@@ -1,0 +1,14 @@
+frontend/node_modules
+frontend/.next
+frontend/.turbo
+backend-venv/
+**/__pycache__/
+*.py[cod]
+*.sqlite3
+.DS_Store
+.env
+.env.*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
