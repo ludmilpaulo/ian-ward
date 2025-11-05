@@ -98,76 +98,139 @@ export default async function HomePage() {
   const { profile, ventures, testimonials } = await getData()
 
   return (
-    <main>
-      <nav className="px-4 max-w-7xl mx-auto py-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-blue-600 text-white grid place-items-center font-bold">IW</div>
-          <div className="font-semibold">{profile.full_name}</div>
-        </div>
-        <div className="flex items-center gap-6 text-sm text-gray-700">
-          <a href="#about">About</a>
-          <a href="#ventures">Ventures</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#contact">Contact</a>
-          {profile.linkedin_url ? (
-            <Link href={profile.linkedin_url} target="_blank" className="inline-flex items-center text-blue-700 font-medium">
-              LinkedIn
-            </Link>
-          ) : null}
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 glass-effect border-b border-gray-200/50 backdrop-blur-md">
+        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white grid place-items-center font-bold text-lg shadow-lg transition-transform hover:scale-105">
+              IW
+            </div>
+            <div className="font-semibold text-lg text-gray-900">{profile.full_name}</div>
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-sm">
+            <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
+            <a href="#ventures" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Ventures</a>
+            <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Testimonials</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
+            {profile.linkedin_url ? (
+              <Link href={profile.linkedin_url} target="_blank" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </Link>
+            ) : null}
+          </div>
         </div>
       </nav>
 
-      <header className="px-4 max-w-7xl mx-auto py-16 sm:py-20 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
-        <div>
-          <h1 className="h1 mb-4">Entrepreneur. Mentor. Partner in Growth.</h1>
-          <p className="p-muted mb-6">{profile.bio_short}</p>
-          <div className="flex gap-3">
-            <a href="#contact" className="rounded-md bg-blue-700 text-white px-5 py-3">Work with Ian</a>
+      {/* Hero Section */}
+      <header className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-28 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+        <div className="space-y-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
+            Entrepreneur.<br />
+            <span className="gradient-text">Mentor.</span><br />
+            Partner in Growth.
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl">
+            {profile.bio_short}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <a 
+              href="#contact" 
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              Work with Ian
+              <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
             {profile.linkedin_url ? (
-              <Link href={profile.linkedin_url} target="_blank" className="rounded-md border px-5 py-3">LinkedIn</Link>
+              <Link 
+                href={profile.linkedin_url} 
+                target="_blank" 
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-all duration-300"
+              >
+                View LinkedIn
+              </Link>
             ) : null}
           </div>
         </div>
         <div className="flex justify-center md:justify-end">
-          {profile.headshot_url ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={profile.headshot_url} alt={profile.full_name} className="h-56 w-56 rounded-2xl object-cover shadow-lg" />
-          ) : (
-            <div className="h-56 w-56 rounded-2xl bg-gray-100 grid place-items-center">Headshot</div>
-          )}
+          <div className="relative">
+            {profile.headshot_url ? (
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-3xl blur-2xl opacity-30"></div>
+                <img 
+                  src={profile.headshot_url} 
+                  alt={profile.full_name} 
+                  className="relative h-64 w-64 sm:h-80 sm:w-80 rounded-3xl object-cover shadow-2xl ring-4 ring-white"
+                />
+              </div>
+            ) : (
+              <div className="h-64 w-64 sm:h-80 sm:w-80 rounded-3xl bg-gradient-to-br from-blue-100 to-indigo-100 grid place-items-center shadow-2xl ring-4 ring-white">
+                <div className="h-32 w-32 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white grid place-items-center font-bold text-4xl shadow-lg">
+                  IW
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
-      <section id="about" className="px-4 max-w-7xl mx-auto py-16 sm:py-20">
-        <h2 className="h2 mb-3">About Ian</h2>
-        <p className="text-gray-700 leading-relaxed whitespace-pre-line">{profile.bio_long || profile.bio_short}</p>
+      {/* About Section */}
+      <section id="about" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About Ian</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+        </div>
+        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed text-center whitespace-pre-line">
+          {profile.bio_long || profile.bio_short}
+        </p>
       </section>
 
-      <section id="ventures" className="px-4 max-w-7xl mx-auto py-16 sm:py-20">
-        <h2 className="h2 mb-8">Ventures</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Ventures Section */}
+      <section id="ventures" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 bg-gray-50">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ventures</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Building and supporting businesses across South Africa</p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {ventures.map(v => (
-            <div key={v.id} className="rounded-xl border p-5 hover:shadow-sm transition">
-              <div className="flex items-center gap-3 mb-3">
+            <div 
+              key={v.id} 
+              className="group relative bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="flex items-start gap-4 mb-4">
                 {v.logo_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={v.logo_url} alt={v.name} className="h-10 w-10 rounded-md object-cover" />
+                  <img src={v.logo_url} alt={v.name} className="h-12 w-12 rounded-xl object-cover shadow-md" />
                 ) : (
-                  <div className="h-10 w-10 rounded-md bg-gray-100 grid place-items-center">{v.name[0]}</div>
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 grid place-items-center text-white font-bold text-lg shadow-md">
+                    {v.name[0]}
+                  </div>
                 )}
-                <div>
-                  <div className="font-semibold">{v.name}</div>
-                  <div className="text-sm text-gray-600">{v.role}</div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-lg text-gray-900 mb-1">{v.name}</h3>
+                  <p className="text-sm text-gray-600">{v.role}</p>
                 </div>
               </div>
-              <p className="text-gray-700 text-sm leading-relaxed mb-3">{v.description}</p>
-              <div className="flex items-center justify-between text-sm text-gray-600">
-                <div>
+              <p className="text-gray-700 leading-relaxed mb-4">{v.description}</p>
+              <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                <div className="text-sm text-gray-500">
                   {v.start_year ? v.start_year : ''}
-                  {v.end_year ? ` – ${v.end_year}` : ''}
+                  {v.end_year ? ` – ${v.end_year}` : v.start_year ? ' – Present' : ''}
                 </div>
                 {v.website ? (
-                  <Link href={v.website} target="_blank" className="text-blue-700 font-medium">Visit</Link>
+                  <Link 
+                    href={v.website} 
+                    target="_blank" 
+                    className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors group"
+                  >
+                    Visit
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 ) : null}
               </div>
             </div>
@@ -175,30 +238,65 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section id="testimonials" className="px-4 max-w-7xl mx-auto py-16 sm:py-20">
-        <h2 className="h2 mb-8">Testimonials</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+      {/* Testimonials Section */}
+      <section id="testimonials" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What People Say</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {testimonials.map(t => (
-            <figure key={t.id} className="rounded-xl border p-6 bg-white">
-              <blockquote className="text-gray-800 leading-relaxed">“{t.content}”</blockquote>
-              <figcaption className="mt-4 text-sm text-gray-600">— {t.author_name}{t.company ? `, ${t.company}` : ''}</figcaption>
+            <figure 
+              key={t.id} 
+              className="group relative bg-white rounded-2xl border border-gray-200 p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <div className="absolute top-0 left-0 text-6xl text-blue-100 font-serif leading-none">&ldquo;</div>
+              <blockquote className="relative text-gray-800 text-lg leading-relaxed mb-6 pt-4">
+                {t.content}
+              </blockquote>
+              <figcaption className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 grid place-items-center text-white font-semibold">
+                  {t.author_name[0]}
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900">{t.author_name}</div>
+                  <div className="text-sm text-gray-600">{t.company || t.author_title}</div>
+                </div>
+              </figcaption>
             </figure>
           ))}
         </div>
       </section>
 
-      <section id="contact" className="px-4 max-w-7xl mx-auto py-16 sm:py-20">
-        <h2 className="h2 mb-3">Get in touch</h2>
-        <p className="p-muted mb-6">Mentorship, partnerships, or new opportunities — let’s talk.</p>
+      {/* Contact Section */}
+      <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-t-3xl">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          <p className="text-gray-600 mt-4 text-lg">
+            Mentorship, partnerships, or new opportunities — let&apos;s talk.
+          </p>
+        </div>
         <ContactForm />
       </section>
 
-      <footer className="px-4 max-w-7xl mx-auto pb-16">
-        <div className="border-t pt-6 text-sm text-gray-600 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>© {new Date().getFullYear()} {profile.full_name}. All rights reserved.</div>
-          <div className="flex items-center gap-4">
+      {/* Footer */}
+      <footer className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 border-t border-gray-200 bg-white">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-gray-600">
+            © {new Date().getFullYear()} {profile.full_name}. All rights reserved.
+          </div>
+          <div className="flex items-center gap-6">
             {profile.linkedin_url ? (
-              <Link href={profile.linkedin_url} target="_blank">LinkedIn</Link>
+              <Link 
+                href={profile.linkedin_url} 
+            target="_blank"
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </Link>
             ) : null}
           </div>
         </div>
