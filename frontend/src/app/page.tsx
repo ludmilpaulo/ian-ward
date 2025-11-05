@@ -36,20 +36,62 @@ type Testimonial = {
   company: string
 }
 
-async function fetchJSON<T>(path: string): Promise<T> {
+async function fetchJSON<T>(path: string): Promise<T | null> {
   const base = process.env.NEXT_PUBLIC_API_BASE || 'http://127.0.0.1:8000/api'
-  const res = await fetch(`${base}${path}`, { cache: 'no-store' })
-  if (!res.ok) throw new Error(`Failed to fetch ${path}`)
-  return res.json()
+  try {
+    const res = await fetch(`${base}${path}`, { cache: 'no-store', next: { revalidate: 60 } })
+    if (!res.ok) return null
+    return res.json()
+  } catch {
+    return null
+  }
 }
 
+const defaultProfile: Profile = {
+  id: 1,
+  full_name: 'Ian Ward',
+  title: 'Entrepreneur & Advisor',
+  location: 'Cape Town, South Africa',
+  bio_short: 'A lifelong entrepreneur with three decades building businesses and supporting founders across South Africa. Known for integrity, deep client relationships, and an ability to spot new opportunities. At Maindo Digital, Ian focuses on driving growth and forging meaningful partnerships.',
+  bio_long: 'Outside the boardroom, Ian mentors young entrepreneurs, volunteers in his community, and enjoys Cape Town\'s outdoors.',
+  headshot_url: '',
+  linkedin_url: 'https://www.linkedin.com/in/ianaward/',
+}
+
+const defaultVentures: Venture[] = [
+  {
+    id: 1,
+    name: 'Maindo Digital',
+    role: 'Growth & Partnerships',
+    description: 'Driving growth initiatives and forging meaningful partnerships across sectors.',
+    website: 'https://maindo.digital',
+    logo_url: '',
+    start_year: null,
+    end_year: null,
+  },
+]
+
+const defaultTestimonials: Testimonial[] = [
+  {
+    id: 1,
+    author_name: 'Founder, Cape Town',
+    author_title: 'Tech Entrepreneur',
+    content: 'Ian\'s guidance was pivotal to our go-to-market. He balances strategic clarity with hands-on support.',
+    company: 'Stealth Startup',
+  },
+]
+
 async function getData() {
-  const [profile, ventures, testimonials] = await Promise.all([
+  const [profileRes, ventures, testimonials] = await Promise.all([
     fetchJSON<Profile>('/profile/primary/'),
     fetchJSON<Venture[]>('/ventures/'),
     fetchJSON<Testimonial[]>('/testimonials/'),
   ])
-  return { profile, ventures, testimonials }
+  return {
+    profile: profileRes || defaultProfile,
+    ventures: Array.isArray(ventures) ? ventures : defaultVentures,
+    testimonials: Array.isArray(testimonials) ? testimonials : defaultTestimonials,
+  }
 }
 
 export default async function HomePage() {
