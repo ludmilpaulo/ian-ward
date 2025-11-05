@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 from core.views import (
     ProfileViewSet,
     VentureViewSet,
@@ -33,4 +34,5 @@ router.register(r'contact', ContactMessageViewSet, basename='contact')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/auth/token/', obtain_auth_token),
 ]
