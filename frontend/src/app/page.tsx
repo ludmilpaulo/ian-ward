@@ -103,15 +103,15 @@ export default async function HomePage() {
       <nav className="sticky top-0 z-50 glass-effect border-b border-gray-200/50 backdrop-blur-md">
         <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white grid place-items-center font-bold text-lg shadow-lg transition-transform hover:scale-105">
+            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 via-red-600 to-green-600 text-white grid place-items-center font-bold text-lg shadow-lg transition-transform hover:scale-105">
               IW
             </div>
             <div className="font-semibold text-lg text-gray-900">{profile.full_name}</div>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
-            <a href="#ventures" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Ventures</a>
-            <a href="#testimonials" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Testimonials</a>
+            <a href="#ventures" className="text-gray-700 hover:text-red-600 transition-colors font-medium">Ventures</a>
+            <a href="#testimonials" className="text-gray-700 hover:text-green-600 transition-colors font-medium">Testimonials</a>
             <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
             {profile.linkedin_url ? (
               <Link href={profile.linkedin_url} target="_blank" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors">
@@ -129,7 +129,7 @@ export default async function HomePage() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
             Entrepreneur.<br />
             <span className="gradient-text">Mentor.</span><br />
-            Partner in Growth.
+            <span className="gradient-text-green">Partner in Growth.</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl">
             {profile.bio_short}
@@ -137,7 +137,7 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a 
               href="#contact" 
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-red-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               Work with Ian
               <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +148,7 @@ export default async function HomePage() {
               <Link 
                 href={profile.linkedin_url} 
                 target="_blank" 
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border-2 border-blue-600 rounded-lg hover:border-red-600 hover:text-red-600 transition-all duration-300"
               >
                 View LinkedIn
               </Link>
@@ -159,7 +159,7 @@ export default async function HomePage() {
           <div className="relative">
             {profile.headshot_url ? (
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-3xl blur-2xl opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-red-400 to-green-400 rounded-3xl blur-2xl opacity-30"></div>
                 <img 
                   src={profile.headshot_url} 
                   alt={profile.full_name} 
@@ -167,8 +167,8 @@ export default async function HomePage() {
                 />
               </div>
             ) : (
-              <div className="h-64 w-64 sm:h-80 sm:w-80 rounded-3xl bg-gradient-to-br from-blue-100 to-indigo-100 grid place-items-center shadow-2xl ring-4 ring-white">
-                <div className="h-32 w-32 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white grid place-items-center font-bold text-4xl shadow-lg">
+              <div className="h-64 w-64 sm:h-80 sm:w-80 rounded-3xl bg-gradient-to-br from-blue-100 via-red-100 to-green-100 grid place-items-center shadow-2xl ring-4 ring-white">
+                <div className="h-32 w-32 rounded-full bg-gradient-to-br from-blue-600 via-red-600 to-green-600 text-white grid place-items-center font-bold text-4xl shadow-lg">
                   IW
                 </div>
               </div>
@@ -181,7 +181,7 @@ export default async function HomePage() {
       <section id="about" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About Ian</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 via-red-600 to-green-600 mx-auto rounded-full"></div>
         </div>
         <p className="text-lg sm:text-xl text-gray-700 leading-relaxed text-center whitespace-pre-line">
           {profile.bio_long || profile.bio_short}
@@ -189,10 +189,10 @@ export default async function HomePage() {
       </section>
 
       {/* Ventures Section */}
-      <section id="ventures" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 bg-gray-50">
+      <section id="ventures" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-red-50 to-blue-50">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ventures</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-red-600 via-blue-600 to-green-600 mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Building and supporting businesses across South Africa</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -205,7 +205,7 @@ export default async function HomePage() {
                 {v.logo_url ? (
                   <img src={v.logo_url} alt={v.name} className="h-12 w-12 rounded-xl object-cover shadow-md" />
                 ) : (
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 grid place-items-center text-white font-bold text-lg shadow-md">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 via-red-600 to-green-600 grid place-items-center text-white font-bold text-lg shadow-md">
                     {v.name[0]}
                   </div>
                 )}
@@ -224,7 +224,7 @@ export default async function HomePage() {
                   <Link 
                     href={v.website} 
                     target="_blank" 
-                    className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors group"
+                    className="inline-flex items-center gap-1 text-blue-600 hover:text-red-600 font-semibold text-sm transition-colors group"
                   >
                     Visit
                     <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -242,7 +242,7 @@ export default async function HomePage() {
       <section id="testimonials" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What People Say</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-green-600 via-blue-600 to-red-600 mx-auto rounded-full"></div>
         </div>
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {testimonials.map(t => (
@@ -250,12 +250,12 @@ export default async function HomePage() {
               key={t.id} 
               className="group relative bg-white rounded-2xl border border-gray-200 p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="absolute top-0 left-0 text-6xl text-blue-100 font-serif leading-none">&ldquo;</div>
+              <div className="absolute top-0 left-0 text-6xl bg-gradient-to-br from-green-100 to-blue-100 bg-clip-text text-transparent font-serif leading-none">&ldquo;</div>
               <blockquote className="relative text-gray-800 text-lg leading-relaxed mb-6 pt-4">
                 {t.content}
               </blockquote>
               <figcaption className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 grid place-items-center text-white font-semibold">
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-green-600 via-blue-600 to-red-600 grid place-items-center text-white font-semibold">
                   {t.author_name[0]}
                 </div>
                 <div>
@@ -269,10 +269,10 @@ export default async function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-t-3xl">
+      <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-blue-50 via-green-50 to-red-50 rounded-t-3xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-red-600 mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-4 text-lg">
             Mentorship, partnerships, or new opportunities — let&apos;s talk.
           </p>
