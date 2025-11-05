@@ -52,7 +52,7 @@ export async function apiGet<T>(path: string, token: string | null): Promise<T> 
   return res.json()
 }
 
-export async function apiSend<T>(path: string, method: string, body: any, token: string | null): Promise<T> {
+export async function apiSend<T>(path: string, method: string, body: unknown, token: string | null): Promise<T> {
   const headers: HeadersInit = { 'Content-Type': 'application/json', ...authHeaders(token) }
   const res = await fetch(`${base()}${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined })
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)

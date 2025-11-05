@@ -28,9 +28,9 @@ export default function ContactForm() {
       if (!res.ok) throw new Error('Failed to send message')
       setStatus('success')
       e.currentTarget.reset()
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus('error')
-      setError(err?.message || 'Something went wrong')
+      setError(err instanceof Error ? err.message : 'Something went wrong')
     }
   }
 

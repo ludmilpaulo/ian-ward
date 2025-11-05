@@ -6,8 +6,6 @@ import { apiGet, apiSend, Profile, Venture, Testimonial, ContactMessage } from '
 export default function AdminPage() {
   const [token, setToken] = useState<string>('')
   const [tab, setTab] = useState<'profile' | 'ventures' | 'testimonials' | 'messages'>('profile')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const tokenFromStorage = useMemo(() => {
     if (typeof window === 'undefined') return ''
@@ -113,9 +111,8 @@ function ProfileEditor({ token }: { token: string }) {
 function VentureManager({ token }: { token: string }) {
   const [rows, setRows] = useState<Venture[]>([])
   const [draft, setDraft] = useState<Partial<Venture>>({})
-  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => { apiGet<Venture[]>('/ventures/', token).then(setRows).catch(e => setError(String(e))) }, [token])
+  useEffect(() => { apiGet<Venture[]>('/ventures/', token).then(setRows).catch(() => {}) }, [token])
 
   async function create() {
     const created = await apiSend<Venture>('/ventures/', 'POST', draft, token)
@@ -175,9 +172,8 @@ function VentureManager({ token }: { token: string }) {
 function TestimonialManager({ token }: { token: string }) {
   const [rows, setRows] = useState<Testimonial[]>([])
   const [draft, setDraft] = useState<Partial<Testimonial>>({})
-  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => { apiGet<Testimonial[]>('/testimonials/', token).then(setRows).catch(e => setError(String(e))) }, [token])
+  useEffect(() => { apiGet<Testimonial[]>('/testimonials/', token).then(setRows).catch(() => {}) }, [token])
 
   async function create() {
     const created = await apiSend<Testimonial>('/testimonials/', 'POST', draft, token)
