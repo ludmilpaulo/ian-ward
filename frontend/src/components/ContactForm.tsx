@@ -35,42 +35,47 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-8 lg:p-10 space-y-6">
+    <form onSubmit={onSubmit} className="max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-8 lg:p-10 space-y-6" aria-label="Contact form">
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-          Name
+          Name <span className="text-red-600" aria-label="required">*</span>
         </label>
         <input
           id="name"
           name="name"
           type="text"
           required
+          autoComplete="name"
+          aria-required="true"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-900 placeholder-gray-400"
           placeholder="Your name"
         />
       </div>
       <div>
         <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-          Email
+          Email <span className="text-red-600" aria-label="required">*</span>
         </label>
         <input
           id="email"
           name="email"
           type="email"
           required
+          autoComplete="email"
+          aria-required="true"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-900 placeholder-gray-400"
           placeholder="you@example.com"
         />
       </div>
       <div>
         <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-          Message
+          Message <span className="text-red-600" aria-label="required">*</span>
         </label>
         <textarea
           id="message"
           name="message"
           rows={5}
           required
+          aria-required="true"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none text-gray-900 placeholder-gray-400"
           placeholder="How can Ian help?"
         />
@@ -79,7 +84,8 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="w-full group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 via-red-600 to-green-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 via-red-600 to-green-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          aria-busy={status === 'loading'}
         >
           {status === 'loading' ? (
             <>

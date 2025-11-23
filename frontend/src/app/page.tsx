@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import ContactForm from '@/components/ContactForm'
+import MobileMenu from '@/components/MobileMenu'
 
 export const metadata: Metadata = {
   title: 'Ian Ward — Portfolio',
+  description: 'Entrepreneur and business advisor with three decades of experience building businesses and mentoring founders across South Africa.',
 }
 
 type Profile = {
@@ -100,31 +102,32 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 glass-effect border-b border-gray-200/50 backdrop-blur-md">
+      <nav className="sticky top-0 z-50 glass-effect border-b border-gray-200/50 backdrop-blur-md" role="navigation" aria-label="Main navigation">
         <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 via-red-600 to-green-600 text-white grid place-items-center font-bold text-lg shadow-lg transition-transform hover:scale-105">
+          <a href="#home" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-1">
+            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 via-red-600 to-green-600 text-white grid place-items-center font-bold text-lg shadow-lg transition-transform hover:scale-105" aria-hidden="true">
               IW
             </div>
             <div className="font-semibold text-lg text-gray-900">{profile.full_name}</div>
-          </div>
+          </a>
           <div className="hidden md:flex items-center gap-8 text-sm">
-            <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
-            <a href="#ventures" className="text-gray-700 hover:text-red-600 transition-colors font-medium">Ventures</a>
-            <a href="#testimonials" className="text-gray-700 hover:text-green-600 transition-colors font-medium">Testimonials</a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
+            <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1">About</a>
+            <a href="#ventures" className="text-gray-700 hover:text-red-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-2 py-1">Ventures</a>
+            <a href="#testimonials" className="text-gray-700 hover:text-green-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-green-500 rounded px-2 py-1">Testimonials</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1">Contact</a>
             {profile.linkedin_url ? (
-              <Link href={profile.linkedin_url} target="_blank" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <Link href={profile.linkedin_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1" aria-label="Visit Ian Ward's LinkedIn profile">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 LinkedIn
               </Link>
             ) : null}
           </div>
+          <MobileMenu linkedinUrl={profile.linkedin_url} />
         </div>
       </nav>
 
       {/* Hero Section */}
-      <header className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-28 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+      <header id="home" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-28 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
         <div className="space-y-6">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
             Entrepreneur.<br />
@@ -137,18 +140,21 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a 
               href="#contact" 
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-red-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-red-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+              aria-label="Contact Ian Ward"
             >
               Work with Ian
-              <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
             {profile.linkedin_url ? (
               <Link 
                 href={profile.linkedin_url} 
-                target="_blank" 
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border-2 border-blue-600 rounded-lg hover:border-red-600 hover:text-red-600 transition-all duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border-2 border-blue-600 rounded-lg hover:border-red-600 hover:text-red-600 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                aria-label="View Ian Ward's LinkedIn profile"
               >
                 View LinkedIn
               </Link>
@@ -159,15 +165,18 @@ export default async function HomePage() {
           <div className="relative">
             {profile.headshot_url ? (
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-red-400 to-green-400 rounded-3xl blur-2xl opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-red-400 to-green-400 rounded-3xl blur-2xl opacity-30" aria-hidden="true"></div>
                 <img 
                   src={profile.headshot_url} 
-                  alt={profile.full_name} 
+                  alt={`${profile.full_name}, ${profile.title} in ${profile.location}`}
                   className="relative h-64 w-64 sm:h-80 sm:w-80 rounded-3xl object-cover shadow-2xl ring-4 ring-white"
+                  width={320}
+                  height={320}
+                  loading="eager"
                 />
               </div>
             ) : (
-              <div className="h-64 w-64 sm:h-80 sm:w-80 rounded-3xl bg-gradient-to-br from-blue-100 via-red-100 to-green-100 grid place-items-center shadow-2xl ring-4 ring-white">
+              <div className="h-64 w-64 sm:h-80 sm:w-80 rounded-3xl bg-gradient-to-br from-blue-100 via-red-100 to-green-100 grid place-items-center shadow-2xl ring-4 ring-white" aria-hidden="true">
                 <div className="h-32 w-32 rounded-full bg-gradient-to-br from-blue-600 via-red-600 to-green-600 text-white grid place-items-center font-bold text-4xl shadow-lg">
                   IW
                 </div>
@@ -178,10 +187,10 @@ export default async function HomePage() {
       </header>
 
       {/* About Section */}
-      <section id="about" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24">
+      <section id="about" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24" aria-labelledby="about-heading">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About Ian</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 via-red-600 to-green-600 mx-auto rounded-full"></div>
+          <h2 id="about-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About Ian</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 via-red-600 to-green-600 mx-auto rounded-full" aria-hidden="true"></div>
         </div>
         <p className="text-lg sm:text-xl text-gray-700 leading-relaxed text-center whitespace-pre-line">
           {profile.bio_long || profile.bio_short}
@@ -189,23 +198,24 @@ export default async function HomePage() {
       </section>
 
       {/* Ventures Section */}
-      <section id="ventures" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-red-50 to-blue-50">
+      <section id="ventures" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-red-50 to-blue-50" aria-labelledby="ventures-heading">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ventures</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-red-600 via-blue-600 to-green-600 mx-auto rounded-full"></div>
+          <h2 id="ventures-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ventures</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-red-600 via-blue-600 to-green-600 mx-auto rounded-full" aria-hidden="true"></div>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Building and supporting businesses across South Africa</p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" role="list">
           {ventures.map(v => (
-            <div 
+            <article 
               key={v.id} 
-              className="group relative bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus-within:ring-4 focus-within:ring-blue-300 focus-within:outline-none"
+              role="listitem"
             >
               <div className="flex items-start gap-4 mb-4">
                 {v.logo_url ? (
-                  <img src={v.logo_url} alt={v.name} className="h-12 w-12 rounded-xl object-cover shadow-md" />
+                  <img src={v.logo_url} alt={`${v.name} logo`} className="h-12 w-12 rounded-xl object-cover shadow-md" width={48} height={48} loading="lazy" />
                 ) : (
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 via-red-600 to-green-600 grid place-items-center text-white font-bold text-lg shadow-md">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-600 via-red-600 to-green-600 grid place-items-center text-white font-bold text-lg shadow-md" aria-hidden="true">
                     {v.name[0]}
                   </div>
                 )}
@@ -223,39 +233,42 @@ export default async function HomePage() {
                 {v.website ? (
                   <Link 
                     href={v.website} 
-                    target="_blank" 
-                    className="inline-flex items-center gap-1 text-blue-600 hover:text-red-600 font-semibold text-sm transition-colors group"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-blue-600 hover:text-red-600 font-semibold text-sm transition-colors group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                    aria-label={`Visit ${v.name} website`}
                   >
                     Visit
-                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
                 ) : null}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24">
+      <section id="testimonials" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 sm:py-24" aria-labelledby="testimonials-heading">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What People Say</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-600 via-blue-600 to-red-600 mx-auto rounded-full"></div>
+          <h2 id="testimonials-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What People Say</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-green-600 via-blue-600 to-red-600 mx-auto rounded-full" aria-hidden="true"></div>
         </div>
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8" role="list">
           {testimonials.map(t => (
             <figure 
               key={t.id} 
               className="group relative bg-white rounded-2xl border border-gray-200 p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300"
+              role="listitem"
             >
-              <div className="absolute top-0 left-0 text-6xl bg-gradient-to-br from-green-100 to-blue-100 bg-clip-text text-transparent font-serif leading-none">&ldquo;</div>
+              <div className="absolute top-0 left-0 text-6xl bg-gradient-to-br from-green-100 to-blue-100 bg-clip-text text-transparent font-serif leading-none" aria-hidden="true">&ldquo;</div>
               <blockquote className="relative text-gray-800 text-lg leading-relaxed mb-6 pt-4">
                 {t.content}
               </blockquote>
               <figcaption className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-green-600 via-blue-600 to-red-600 grid place-items-center text-white font-semibold">
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-green-600 via-blue-600 to-red-600 grid place-items-center text-white font-semibold" aria-hidden="true">
                   {t.author_name[0]}
                 </div>
                 <div>
@@ -269,10 +282,10 @@ export default async function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-blue-50 via-green-50 to-red-50 rounded-t-3xl">
+      <section id="contact" className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20 sm:py-24 bg-gradient-to-br from-blue-50 via-green-50 to-red-50 rounded-t-3xl" aria-labelledby="contact-heading">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-red-600 mx-auto rounded-full"></div>
+          <h2 id="contact-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-red-600 mx-auto rounded-full" aria-hidden="true"></div>
           <p className="text-gray-600 mt-4 text-lg">
             Mentorship, partnerships, or new opportunities — let&apos;s talk.
           </p>
@@ -281,7 +294,7 @@ export default async function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 border-t border-gray-200 bg-white">
+      <footer className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 border-t border-gray-200 bg-white" role="contentinfo">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-gray-600">
             © {new Date().getFullYear()} {profile.full_name}. All rights reserved.
@@ -290,10 +303,12 @@ export default async function HomePage() {
             {profile.linkedin_url ? (
               <Link 
                 href={profile.linkedin_url} 
-            target="_blank"
-                className="text-gray-600 hover:text-blue-600 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-1"
+                aria-label="Visit Ian Ward's LinkedIn profile"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
               </Link>
@@ -301,6 +316,6 @@ export default async function HomePage() {
           </div>
         </div>
       </footer>
-      </main>
+    </main>
   )
 }
